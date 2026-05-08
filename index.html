@@ -630,9 +630,13 @@ function renderCard() {
   document.getElementById('mastery-badge').textContent  = MASTERY_LABELS[lvl];
   document.getElementById('mastery-badge').className = 'mastery-badge m' + lvl;
 
-  // Reset flip
+  // Reset flip instantly (no animation so the answer isn't briefly visible)
   flipped = false;
-  document.getElementById('card').classList.remove('flipped');
+  const cardEl = document.getElementById('card');
+  cardEl.style.transition = 'none';
+  cardEl.classList.remove('flipped');
+  void cardEl.offsetWidth; // force reflow before re-enabling transition
+  cardEl.style.transition = '';
   document.getElementById('btn-answer').classList.add('hidden');
   document.getElementById('btn-flip-row').style.display = '';
   document.getElementById('scene').style.cursor = 'pointer';
