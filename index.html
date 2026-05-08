@@ -729,6 +729,13 @@ function showMessage(text, color) {
 
 function flashBody(_cls) {}
 
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('screen-quiz').classList.contains('active')) return;
+  if (e.key === 'ArrowRight' && !flipped)  { e.preventDefault(); flipCard(); }
+  if (e.key === 'ArrowUp'    &&  flipped)  { e.preventDefault(); answer(true); }
+  if (e.key === 'ArrowDown'  &&  flipped)  { e.preventDefault(); answer(false); }
+});
+
 // ════════════════════════════════════════════
 //  SCREENS
 // ════════════════════════════════════════════
